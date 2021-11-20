@@ -1,0 +1,19 @@
+<mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{ filtersTitle }}
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <div class="filter-fields">
+        <div class="vertical-form-field">
+            <multiselect [title]="selectCountriesTitle" [options]="countriesOptions"
+                (selectionChanged)="onFilterCountriesChange($event)"></multiselect>
+        </div>
+
+        <div class="vertical-form-field">
+            <multiselect [title]="selectDevicesTitle" [options]="devicesOptions"
+                (selectionChanged)="onFilterDevicesChange($event)"></multiselect>
+        </div>
+    </div>
+</mat-expansion-panel>

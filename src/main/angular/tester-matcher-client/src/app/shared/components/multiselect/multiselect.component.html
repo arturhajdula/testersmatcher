@@ -1,0 +1,16 @@
+<mat-form-field *ngIf="options; else dataLoading" >
+    <mat-label>{{ title }}</mat-label>
+    <mat-select #select multiple (openedChange)="onSelectedOpenedChange($event)">
+        <div class="select-all">
+            <mat-checkbox [(ngModel)]="allSelected" [ngModelOptions]="{standalone: true}"
+                (change)="toggleAllSelection()">ALL</mat-checkbox>
+        </div>
+        <mat-option (click)="optionClick()" *ngFor="let option of options" [value]="option.value">
+            {{option.value}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<ng-template #dataLoading>
+    <mat-spinner></mat-spinner>
+</ng-template>
