@@ -9,6 +9,7 @@ import { UsersWithExperienceDataSource } from '../users-with-experience-data-sou
 export class TesterMatcherTableComponent implements OnInit {
 
   @Input() dataSource: UsersWithExperienceDataSource;
+  @Input() waitingForData: boolean;
 
   displayedColumns: string[];
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FiltersSelection } from '../shared/model/filters-selection';
+import { UserWithExperience } from '../shared/model/user-with-experience';
 import { TesterMatcherService } from './tester-matcher.service';
 import { UsersWithExperienceDataSource } from './users-with-experience-data-source';
 
@@ -11,6 +12,7 @@ import { UsersWithExperienceDataSource } from './users-with-experience-data-sour
 export class MainComponent implements OnInit {
 
   usersWithExperienceDataSource: UsersWithExperienceDataSource;
+  waitingForData: boolean;
 
   constructor(
     private testerMatcherService: TesterMatcherService
@@ -18,15 +20,19 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.usersWithExperienceDataSource = new UsersWithExperienceDataSource(null);
+    this.waitingForData = false;
   }
 
   onFiltersSelected(filtersSelection: FiltersSelection) {
-    this.usersWithExperienceDataSource = null;
+    this.waitingForData = true;
     this.executeAlgorithm(filtersSelection.countries, filtersSelection.devices);
   }
 
   private executeAlgorithm(countries: Set<string>, devices: Set<string>) {
     this.testerMatcherService.getUsersWithExperience(countries, devices)
-      .subscribe(ret => this.usersWithExperienceDataSource = new UsersWithExperienceDataSource(ret));
+      .subscribe((ret: UserWithExperience[]) => {
+        this.usersWithExperienceDataSource = new UsersWithExperienceDataSource(ret);
+        this.waitingForData = false;
+      });
   }
 }

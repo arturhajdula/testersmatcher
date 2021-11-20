@@ -1,4 +1,4 @@
 <div class="main">
   <tester-matcher-filters class="filters" (filtersSelected)="onFiltersSelected($event)"></tester-matcher-filters>
-  <tester-matcher-table class="table" [dataSource]="usersWithExperienceDataSource"></tester-matcher-table>
+  <tester-matcher-table class="table" [dataSource]="usersWithExperienceDataSource" [waitingForData]="waitingForData"></tester-matcher-table>
 </div>
