@@ -31,7 +31,7 @@ export class MainComponent implements OnInit {
   private executeAlgorithm(countries: Set<string>, devices: Set<string>) {
     this.testerMatcherService.getUsersWithExperience(countries, devices)
       .subscribe((ret: UserWithExperience[]) => {
-        this.usersWithExperienceDataSource = new UsersWithExperienceDataSource(ret);
+        this.usersWithExperienceDataSource.setData(ret);
         this.waitingForData = false;
       });
   }
